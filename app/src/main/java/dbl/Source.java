@@ -47,6 +47,7 @@ class Navbar extends JPanel{
         item.setForeground(Color.WHITE);
         item.setBackground(color);
         item.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
+        item.setFocusable(false);
         return item;
     }
 }
@@ -72,6 +73,7 @@ class Sidebar extends JPanel{
         item.setAlignmentX(Component.CENTER_ALIGNMENT);
         item.setMaximumSize(new Dimension(250, 45));
         item.setPreferredSize(new Dimension(250, 45));
+        item.setFocusable(false);
         return item;
         }
 }
