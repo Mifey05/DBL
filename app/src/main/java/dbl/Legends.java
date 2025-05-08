@@ -7,26 +7,44 @@ import javax.swing.*;
 
 public class Legends extends Source{
     private Point initialClick;
+    private ComponentResizer resizer;
     public Legends(){
         setTitle("Dragon Ball Legends");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setSize(1920, 1080);
+        setSize(1366, 768);
+        setResizable(true);
         setUndecorated(true);
-        Navbar navbar = new Navbar();
+        JPanel borderahh = new JPanel(new BorderLayout());
+        borderahh.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.DARK_GRAY));
+        borderahh.setOpaque(true);
+        borderahh.setBackground(Color.BLACK);
+        Navbar navbar = new Navbar(this);
         enableDrag(navbar);
 
-        setLayout(new BorderLayout());
-        add(navbar, BorderLayout.PAGE_START);
+        getContentPane().setBackground(Color.BLACK);
+        
+        borderahh.add(navbar, BorderLayout.PAGE_START);
 
         CharCard leCards = new CharCard();
         JScrollPane scroll = new JScrollPane(leCards, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.getVerticalScrollBar().setUnitIncrement(16);
 
-        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new Sidebar(), scroll);
+        scroll.getViewport().addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                leCards.updateLayout(scroll.getViewport().getWidth());
+            }
+        });
+
+        Sidebar sidebar = new Sidebar(leCards);
+        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sidebar, scroll);
         split.setDividerLocation(265);
         split.setDividerSize(0);
-        add(split, BorderLayout.CENTER);
+        borderahh.add(split, BorderLayout.CENTER);
+        setContentPane(borderahh);
+        resizer = new ComponentResizer(borderahh, this);
+        setBackground(Color.BLACK);
     }
 
     private void enableDrag(JComponent dragArea) {
@@ -56,5 +74,6 @@ public class Legends extends Source{
 
     public static void main(String[] args) {
         new Legends().setVisible(true);
+
     }
 }
