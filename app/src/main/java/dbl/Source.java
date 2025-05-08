@@ -2,7 +2,6 @@ package dbl;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import javax.swing.*;
 
 public class Source extends JFrame{
@@ -133,7 +132,6 @@ class CharCard extends JPanel{
         };
     }
     public void updateLayout(int width) {
-        // Calculate how many columns we can fit (each card is ~250px wide with margins)
         int newColumns = Math.max(1, width / 250);
         
         if (newColumns != columns) {
@@ -155,7 +153,6 @@ class ComponentResizer extends MouseAdapter {
     private boolean isResizing = false;
     private Cursor defaultCursor;
 
-    // Constants for directions with proper visibility
     protected static final int NORTH = 1;
     protected static final int SOUTH = 2;
     protected static final int WEST = 4;
@@ -169,7 +166,7 @@ class ComponentResizer extends MouseAdapter {
         target.addMouseMotionListener(this);
     }
 
-    protected int getResizeDirection(Point p) {  // Changed to protected
+    protected int getResizeDirection(Point p) {
         int width = target.getWidth();
         int height = target.getHeight();
         
