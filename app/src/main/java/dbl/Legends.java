@@ -21,22 +21,17 @@ public class Legends extends Source{
         borderahh.setBackground(Color.BLACK);
         Navbar navbar = new Navbar(this);
         enableDrag(navbar);
-
         getContentPane().setBackground(Color.BLACK);
-        
         borderahh.add(navbar, BorderLayout.PAGE_START);
-
-        CharCard leCards = new CharCard();
+        CharCard leCards = new CharCard(this);
         JScrollPane scroll = new JScrollPane(leCards, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.getVerticalScrollBar().setUnitIncrement(16);
-
         scroll.getViewport().addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 leCards.updateLayout(scroll.getViewport().getWidth());
             }
         });
-
         Sidebar sidebar = new Sidebar(leCards);
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sidebar, scroll);
         split.setDividerLocation(265);
@@ -46,7 +41,6 @@ public class Legends extends Source{
         resizer = new ComponentResizer(borderahh, this);
         setBackground(Color.BLACK);
     }
-
     private void enableDrag(JComponent dragArea) {
         dragArea.addMouseListener(new MouseAdapter() {
             @Override
@@ -54,7 +48,6 @@ public class Legends extends Source{
                 initialClick = e.getPoint();
             }
         });
-
         dragArea.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -62,18 +55,14 @@ public class Legends extends Source{
                 if (frame != null && initialClick != null) {
                     int thisX = frame.getLocation().x;
                     int thisY = frame.getLocation().y;
-
                     int xMoved = e.getX() - initialClick.x;
                     int yMoved = e.getY() - initialClick.y;
-
                     frame.setLocation(thisX + xMoved, thisY + yMoved);
                 }
             }
         });
     }
-
     public static void main(String[] args) {
         new Legends().setVisible(true);
-
     }
 }
