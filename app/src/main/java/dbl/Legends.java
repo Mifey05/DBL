@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
-public class Legends extends Source{
+public class Legends extends JFrame{
     private Point initialClick;
     private ComponentResizer resizer;
     public Legends(){
